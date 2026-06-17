@@ -2,7 +2,7 @@
 
 A ROS 2 node that drives a 6-DOF AR4 robot arm (plus gripper) with physics-based trapezoidal velocity motion profiles and streams the resulting joint states to RViz for visualization.
 
-![Demo](media/demo.gif)
+<img width="1209" height="830" alt="msrdc_LItYTx4FW2" src="https://github.com/user-attachments/assets/74b89114-06b3-47c8-9df7-f75b7d622018" />
 
 ## Architecture
 
