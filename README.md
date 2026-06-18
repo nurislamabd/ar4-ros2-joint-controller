@@ -1,8 +1,25 @@
+<div align="center">
+
 # AR4 ROS 2 Joint Controller
 
-A ROS 2 node that drives a 6-DOF AR4 robot arm (plus gripper) with physics-based trapezoidal velocity motion profiles and streams the resulting joint states to RViz for visualization.
+**A ROS 2 node that drives a 6-DOF AR4 robot arm (plus gripper) with physics-based trapezoidal velocity motion profiles, streaming joint states to RViz for visualization.**
 
-<img width="1209" height="830" alt="msrdc_LItYTx4FW2" src="https://github.com/user-attachments/assets/74b89114-06b3-47c8-9df7-f75b7d622018" />
+![ROS 2 Jazzy](https://img.shields.io/badge/ROS%202-Jazzy-blue)
+![C++17](https://img.shields.io/badge/C%2B%2B-17-blue)
+![Ubuntu 24.04](https://img.shields.io/badge/Ubuntu-24.04-orange)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
+
+<img width="1209" height="830" alt="AR4 arm in RViz" src="https://github.com/user-attachments/assets/74b89114-06b3-47c8-9df7-f75b7d622018" />
+
+</div>
+
+## Features
+
+- **Trapezoidal velocity profiles** — smooth accelerate / cruise / decelerate motion for every joint, with no overshoot.
+- **6-DOF arm + gripper** — drives all six arm joints plus an actuated gripper finger; the opposite finger follows via a URDF `<mimic>` joint.
+- **Continuous oscillation** — sweeps between a home pose and a configurable target pose, pausing at each end.
+- **Fully parameterized** — velocities, accelerations, targets, and rates are all set from a single YAML file; no recompilation needed.
+- **Self-contained** — ships with its own URDF and RViz config; one launch command brings up the controller, `robot_state_publisher`, and RViz.
 
 ## Architecture
 
@@ -28,6 +45,23 @@ stopping_distance = v² / (2a)
 ```
 
 When the remaining distance to the target is no greater than the stopping distance, the joint begins to decelerate. This profile logic was validated against an existing MATLAB Simulink baseline from a separate project.
+
+## Project Structure
+
+```
+ar4_joint_controller/
+├── config/
+│   ├── arm_params.yaml      # Tunable motion parameters
+│   └── arm.rviz             # RViz display configuration
+├── launch/
+│   └── arm.launch.py        # Controller + robot_state_publisher + RViz
+├── src/
+│   └── arm_controller.cpp   # Trapezoidal-profile controller node
+├── urdf/
+│   └── ar4_arm.urdf         # Self-contained AR4 description
+├── CMakeLists.txt
+└── package.xml
+```
 
 ## Quick Start
 
@@ -82,4 +116,4 @@ arm_controller:
 
 ## License
 
-MIT
+Released under the [MIT License](LICENSE).
