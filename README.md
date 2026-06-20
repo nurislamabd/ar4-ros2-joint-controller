@@ -44,7 +44,7 @@ Each joint follows a **trapezoidal velocity profile**: it accelerates at a const
 stopping_distance = v² / (2a)
 ```
 
-When the remaining distance to the target is no greater than the stopping distance, the joint begins to decelerate. This profile logic was validated against an existing MATLAB Simulink baseline from a separate project.
+When the remaining distance to the target is no greater than the stopping distance, the joint begins to decelerate.
 
 ## Project Structure
 
